@@ -12,21 +12,8 @@ export class UsuarioService {
     private readonly usuarioRepository: Repository<Usuario>,
   ) {}
 
-  listaUsuarios = [
-    {
-      nome: 'Edson',
-    },
-    {
-      nome: 'Guilherme',
-    },
-    {
-      nome: 'Fernando',
-    },
-  ];
-
   create(createUsuarioDto: CreateUsuarioDto) {
     const entity = new Usuario();
-    entity.id = '1';
     entity.email = createUsuarioDto.email;
     entity.nome = createUsuarioDto.nome;
 
@@ -34,19 +21,22 @@ export class UsuarioService {
   }
 
   findAll() {
-    return this.listaUsuarios.filter((item) => item.nome.startsWith('E'));
+    const listaUsuariosBD = this.usuarioRepository.find();
+    return listaUsuariosBD;
   }
 
-  findOne(id: number) {
-    return this.listaUsuarios[id];
+  findOne(id: string) {
+    const usuario = this.usuarioRepository.findOne({
+      where: { id },
+    });
+    return usuario;
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    this.listaUsuarios[id].nome = updateUsuarioDto.nome;
-    return this.listaUsuarios[id];
+  update(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuarioRepository.update(id, updateUsuarioDto);
   }
 
-  remove(id: number) {
-    return delete this.listaUsuarios[id];
+  async remove(id: string) {
+    await this.usuarioRepository.delete(id);
   }
 }
