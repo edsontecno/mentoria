@@ -16,6 +16,7 @@ export class UsuarioService {
     const entity = new Usuario();
     entity.email = createUsuarioDto.email;
     entity.nome = createUsuarioDto.nome;
+    entity.senha = createUsuarioDto.senha;
 
     return this.usuarioRepository.save(entity);
   }
