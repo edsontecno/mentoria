@@ -25,18 +25,18 @@ export class UsuarioService {
     return listaUsuariosBD;
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     const usuario = this.usuarioRepository.findOne({
       where: { id },
     });
     return usuario;
   }
 
-  update(id: string, updateUsuarioDto: UpdateUsuarioDto) {
+  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuarioRepository.update(id, updateUsuarioDto);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     await this.usuarioRepository.delete(id);
   }
 }
