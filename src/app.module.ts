@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { AutenticacaoModule } from './autenticacao/autenticacao.module';
+import { APP_FILTER } from '@nestjs/core';
+import { FiltroDeExcecaoGlobal } from './filtros/filtro-de-excecao-global';
 
 @Module({
   imports: [
@@ -20,6 +22,12 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
     AutenticacaoModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: FiltroDeExcecaoGlobal,
+    },
+  ],
 })
 export class AppModule {}

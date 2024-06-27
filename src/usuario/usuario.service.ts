@@ -13,6 +13,7 @@ export class UsuarioService {
   ) {}
 
   create(createUsuarioDto: CreateUsuarioDto) {
+    throw new Error('teste');
     const entity = new Usuario();
     entity.email = createUsuarioDto.email;
     entity.nome = createUsuarioDto.nome;
