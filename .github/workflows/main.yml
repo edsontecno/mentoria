@@ -1,0 +1,22 @@
+# .github/workflows/manual.yml
+name: Executar com Parâmetros
+
+on:
+  workflow_dispatch:
+    inputs:
+      ambiente:
+        description: 'Ambiente de destino'
+        required: true
+        default: 'dev'
+      versao:
+        description: 'Versão da aplicação'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar parâmetros
+        run: |
+          echo "Ambiente: ${{ github.event.inputs.ambiente }}"
+          echo "Versão: ${{ github.event.inputs.versao }}"
